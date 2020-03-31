@@ -1,0 +1,42 @@
+footer {
+  border-top: 1px solid #e6e6e6;
+}
+.functions-wrap,.functions-list {
+  display: flex;
+  justify-content: space-between;
+}
+.functions-wrap {
+  padding: 16px 12px;
+  font-size: 20px;
+  color: #505050;
+  span {
+    padding-top: 5px;
+  }
+  .btn-remove {
+    padding: none;
+    border: none;
+    background: none;
+    color: #505050;
+    &:hover {
+      cursor: pointer;
+      color: rgb(38, 87, 235);
+    }
+  }
+}
+.functions-list {
+  width: 250px;
+  .function-item {
+    padding: 6px;
+    &:hover {
+      cursor: pointer;
+      border: 1px solid rgb(38, 87, 235);
+      border-radius: 3px;
+    }
+    a {
+      color: #505050;
+    }
+  }
+}
+a {
+  text-decoration: none;
+}
