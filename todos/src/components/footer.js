@@ -2,22 +2,38 @@ import React, { Component } from "react";
 
 class Footer extends Component {
   render() {
+    const { countLeft, countAll } = this.props;
     return (
       <footer>
         <div className="functions-wrap">
-          <span>{this.props.count} item left</span>
+          <span>{countLeft}</span>
+          <span>{countLeft > 1 ? "items" : "item"} left</span>
           <ul className="functions-list">
             <li className="function-item">
-              <a href="#">All</a>
+              <a href="#" onClick={() => this.props.clickToShow("All")}>
+                All
+              </a>
             </li>
             <li className="function-item">
-              <a href="#/Active/">Active</a>
+              <a
+                href="#/Active/"
+                onClick={() => this.props.clickToShow("Active")}
+              >
+                Active
+              </a>
             </li>
             <li className="function-item">
-              <a href="#/Completed/">Completed</a>
+              <a
+                href="#/Completed/"
+                onClick={() => this.props.clickToShow("Completed")}
+              >
+                Completed
+              </a>
             </li>
           </ul>
-          <button className="btn-remove">Clear completed</button>
+          {countLeft < countAll && (
+            <button className="btn-remove">Clear completed</button>
+          )}
         </div>
       </footer>
     );

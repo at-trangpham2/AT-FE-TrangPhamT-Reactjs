@@ -22,12 +22,13 @@ body {
     &:hover .remove{
       display: block;
     }
-    label {
+   .label-todo {
       margin-left: 12px;
       color: #444343;
     }
   }
   .remove {
+    cursor: pointer;
     display: none;
     padding: none;
     border: none;
@@ -38,7 +39,7 @@ body {
     }
   }
 }
-.todo-item-complete > label{
+.todo-item-complete{
   text-decoration: line-through;
   opacity: 0.3;
 }
