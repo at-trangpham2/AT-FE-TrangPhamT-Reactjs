@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Footer extends Component {
   render() {
-    const { countLeft, countAll } = this.props;
+    const { countLeft, countAll, clickClearComp } = this.props;
     return (
       <footer>
         <div className="functions-wrap">
@@ -32,7 +32,7 @@ class Footer extends Component {
             </li>
           </ul>
           {countLeft < countAll && (
-            <button className="btn-remove">Clear completed</button>
+            <button className="btn-remove" onClick={clickClearComp}>Clear completed</button>
           )}
         </div>
       </footer>

@@ -12,6 +12,7 @@ class App extends Component {
       Todos: [],
       todoShow: "All"
     };
+    this.clearCompleted = this.clearCompleted.bind(this);
   }
   addToList = newValue => {
     this.setState({
@@ -59,7 +60,9 @@ class App extends Component {
   };
 
   clearCompleted() {
-
+    this.setState({
+      Todos: this.state.Todos.filter(todo => !todo.isComplete)
+    })
   }
 
   render() {
@@ -94,7 +97,10 @@ class App extends Component {
               ))}
             </ul>
           </div>
-          <Footer countAll={Todos.length} countLeft={activeCounttodo} clickToShow={this.showTodo} />
+          <Footer countAll={Todos.length}
+           countLeft={activeCounttodo}
+            clickToShow={this.showTodo}
+             clickClearComp={this.clearCompleted} />
         </div>
       </div>
     );
