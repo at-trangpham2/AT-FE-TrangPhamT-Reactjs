@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import "./App.scss";
-import Header from "./components/header";
-import Input from "./components/input";
-import Todolist from "./components/todolist";
-import Footer from "./components/footer";
+import React, { Component } from 'react';
+import './App.scss';
+import Header from './components/header';
+import Input from './components/input';
+import Todolist from './components/todolist';
+import Footer from './components/footer';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       Todos: [],
-      todoShow: "All"
+      todoShow: 'All'
     };
     this.clearCompleted = this.clearCompleted.bind(this);
   }
@@ -43,7 +43,7 @@ class App extends Component {
     });
   };
 
-  showTodo = (todoShow = "") => {
+  showTodo = (todoShow = '') => {
     this.setState({
       todoShow
     });
@@ -68,11 +68,11 @@ class App extends Component {
   render() {
     const { Todos, todoShow } = this.state;
     let activeCounttodo = Todos.filter(todo => !todo.isComplete).length;
-    const filterByStatus = (Todos = [], todoShow = "") => {
+    const filterByStatus = (Todos = [], todoShow = '') => {
       switch (todoShow) {
-        case "Active":
+        case 'Active':
           return Todos.filter(item => !item.isComplete);
-        case "Completed":
+        case 'Completed':
           return Todos.filter(item => item.isComplete);
         default:
           return Todos;
@@ -99,7 +99,7 @@ class App extends Component {
           </div>
           <Footer countAll={Todos.length}
            countLeft={activeCounttodo}
-            clickToShow={this.showTodo} activeLink={todoShow}
+            clickToShow={this.showTodo}
              clickClearComp={this.clearCompleted} />
         </div>
       </div>

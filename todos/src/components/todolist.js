@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Todolist extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Todolist extends Component {
   render() {
     let classes = 'label-todo';
     if (this.props.isComplete) {
-      classes += " todo-item-complete";
+      classes += ' todo-item-complete';
     }
     
     return (
