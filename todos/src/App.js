@@ -99,7 +99,7 @@ class App extends Component {
           </div>
           <Footer countAll={Todos.length}
            countLeft={activeCounttodo}
-            clickToShow={this.showTodo}
+            clickToShow={this.showTodo} activeLink={todoShow}
              clickClearComp={this.clearCompleted} />
         </div>
       </div>

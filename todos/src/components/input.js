@@ -10,8 +10,12 @@ class InputItem extends Component {
   }
   onKeyPress = (e) => {
     if(e.key === 'Enter') {
-      this.props.addTodos(this.state.newValue);
-      this.state.newValue = '';
+      if(this.state.newValue.trim()) {
+        this.props.addTodos(this.state.newValue);
+        this.setState({
+          newValue: ''
+        })
+      }
     }
   }
   handleChange(e) {

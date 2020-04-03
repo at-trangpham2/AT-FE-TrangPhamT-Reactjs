@@ -1,7 +1,8 @@
 footer {
   border-top: 1px solid #e6e6e6;
 }
-.functions-wrap,.functions-list {
+.functions-wrap,
+.functions-list {
   display: flex;
   justify-content: space-between;
 }
@@ -22,18 +23,27 @@ footer {
       color: rgb(38, 87, 235);
     }
   }
+  .count-wrap span:first-child {
+    margin-right: 14px;
+  }
 }
 .functions-list {
-  width: 250px;
+  width: 260px;
   .function-item {
-    padding: 6px;
-    &:hover {
-      cursor: pointer;
-      border: 1px solid rgb(38, 87, 235);
-      border-radius: 3px;
-    }
     a {
       color: #505050;
+      padding: 6px;
+      &:hover {
+        cursor: pointer;
+        border: 1px solid rgb(38, 87, 235);
+        border-radius: 3px;
+      }
+      &:focus {
+        padding: 6px;
+        border: 1px solid rgb(38, 87, 235);
+        border-radius: 3px;
+        color: #818181;
+      }
     }
   }
 }

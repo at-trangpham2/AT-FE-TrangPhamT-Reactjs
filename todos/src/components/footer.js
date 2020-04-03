@@ -2,12 +2,14 @@ import React, { Component } from "react";
 
 class Footer extends Component {
   render() {
-    const { countLeft, countAll, clickClearComp } = this.props;
+    const { countLeft, countAll, clickClearComp, activeLink } = this.props;
     return (
       <footer>
         <div className="functions-wrap">
-          <span>{countLeft}</span>
-          <span>{countLeft > 1 ? "items" : "item"} left</span>
+          <div className="count-wrap">
+            <span>{countLeft}</span>
+            <span>{countLeft > 1 ? "items" : "item"} left</span>
+          </div>
           <ul className="functions-list">
             <li className="function-item">
               <a href="#" onClick={() => this.props.clickToShow("All")}>
@@ -17,16 +19,14 @@ class Footer extends Component {
             <li className="function-item">
               <a
                 href="#/Active/"
-                onClick={() => this.props.clickToShow("Active")}
-              >
+                onClick={() => this.props.clickToShow("Active")}>
                 Active
               </a>
             </li>
             <li className="function-item">
               <a
                 href="#/Completed/"
-                onClick={() => this.props.clickToShow("Completed")}
-              >
+                onClick={() => this.props.clickToShow("Completed")}>
                 Completed
               </a>
             </li>
