@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.scss';
 import Header from './components/header';
 import Input from './components/input';
-import Todolist from './components/todolist';
+import Todolist from './components/todolist/todolist';
 import Footer from './components/footer';
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
       ]
     });
   };
-
+  
   onItemClicked = value => {
     const { Todos } = this.state;
     this.setState({
@@ -42,12 +42,7 @@ class App extends Component {
       ...this.state.Todos
     });
   };
-
-  showTodo = (todoShow = '') => {
-    this.setState({
-      todoShow
-    });
-  };
+  
   removeItem = value => {
     for (let i = 0; i < this.state.Todos.length; i++) {
       if (parseInt(value) === this.state.Todos[i].id) {
@@ -56,6 +51,12 @@ class App extends Component {
     }
     this.setState({
       ...this.state.Todos
+    });
+  };
+
+  showTodo = (todoShow = '') => {
+    this.setState({
+      todoShow
     });
   };
 
@@ -83,24 +84,14 @@ class App extends Component {
         <div className="container">
           <Header />
           <Input addTodos={this.addToList} />
-          <div className="display-todo">
-            <ul className="todo-list">
-              {filterByStatus(Todos, todoShow).map((todo, index) => (
-                <Todolist
-                  name={todo.name}
-                  key={index}
-                  value={todo.id}
-                  removeItem={this.removeItem}
-                  onChecked={this.onItemClicked}
-                  isComplete={todo.isComplete}
-                />
-              ))}
-            </ul>
-          </div>
+          <Todolist
+            Todos={filterByStatus(Todos, todoShow)}
+            onItemClicked={this.onItemClicked} 
+            remove={this.removeItem}/>
           <Footer countAll={Todos.length}
            countLeft={activeCounttodo}
             clickToShow={this.showTodo}
-             clickClearComp={this.clearCompleted} />
+              clickClearComp={this.clearCompleted} />
         </div>
       </div>
     );
