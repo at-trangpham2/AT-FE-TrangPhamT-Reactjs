@@ -35,4 +35,4 @@ class InputItem extends Component {
     );
   }
 }
-export default InputItem;
+export {InputItem};

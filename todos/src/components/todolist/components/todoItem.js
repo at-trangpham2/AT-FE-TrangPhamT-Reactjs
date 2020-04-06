@@ -45,4 +45,4 @@ class TodoItem extends Component {
     );
   }
 }
-export default TodoItem;
+export  {TodoItem};
