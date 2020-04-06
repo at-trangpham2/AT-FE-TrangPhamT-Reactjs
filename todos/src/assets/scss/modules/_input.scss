@@ -1,0 +1,13 @@
+.enter-todo,.enter {
+  width: 100%;
+}
+input {
+  padding: 12px;
+  font-style: italic;
+  font-size: 24px;
+  border: none;
+  border-bottom: 1px solid #e6e6e6;
+  &:focus {
+    outline: none;
+  }
+}
