@@ -6,7 +6,7 @@ import {InputItem} from './components/input';
 import {Todolist} from './components/todolist/todolist';
 import {Footer} from './components/footer';
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -102,5 +102,3 @@ class App extends Component {
     );
   }
 }
-
-export {App};
