@@ -15,6 +15,7 @@ export class App extends Component {
     };
     this.clearCompleted = this.clearCompleted.bind(this);
   }
+
   addToList = newValue => {
     this.setState({
       Todos: [
@@ -26,7 +27,21 @@ export class App extends Component {
         }
       ]
     });
-  };
+  }
+
+  componentDidMount() {
+    let Todos = localStorage.getItem('Todos');
+    if(Todos) {
+      this.setState({
+        Todos: JSON.parse(localStorage.getItem('Todos'))
+      })
+    }
+  }
+
+  componentDidUpdate() {
+    // console.log('update');
+    localStorage.setItem('Todos', JSON.stringify(this.state.Todos))
+  }
   
   onItemClicked = value => {
     const { Todos } = this.state;
@@ -40,7 +55,6 @@ export class App extends Component {
         }
         return item;
       }),
-      ...this.state.Todos
     });
   };
   
@@ -68,6 +82,7 @@ export class App extends Component {
   }
 
   render() {
+    // console.log('render');
     const { Todos, todoShow } = this.state;
     let activeCounttodo = Todos.filter(todo => !todo.isComplete).length;
     const filterByStatus = (Todos = [], todoShow = '') => {
@@ -90,7 +105,7 @@ export class App extends Component {
           <Header />
           <InputItem addTodos={this.addToList} />
           <Todolist
-            Todos={filterByStatus(Todos, todoShow)}
+            Todos={filterByStatus(Todos, todoShow)} 
             onItemClicked={this.onItemClicked} 
             remove={this.removeItem}/>
           <Footer countAll={Todos.length}
@@ -101,4 +116,5 @@ export class App extends Component {
       </div>
     );
   }
+  
 }

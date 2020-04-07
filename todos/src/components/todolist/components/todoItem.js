@@ -4,7 +4,7 @@ export class TodoItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isComplete: this.props.isComplete
+      id: this.props.id
     }
     this.completeTodo = this.completeTodo.bind(this);
     this.onChangeComp = this.onChangeComp.bind(this);
@@ -18,7 +18,7 @@ export class TodoItem extends Component {
   };
   onChangeComp = (event) => {
     this.setState({
-      isComplete: event.target.value
+      id: event.target.value
     })
   }
   render() {
