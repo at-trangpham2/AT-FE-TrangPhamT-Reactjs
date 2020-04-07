@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './App.scss';
-import Header from './components/header';
-import Input from './components/input';
-import Todolist from './components/todolist/todolist';
-import Footer from './components/footer';
+import { Helmet } from 'react-helmet';
+import {Header} from './components/header';
+import {InputItem} from './components/input';
+import {Todolist} from './components/todolist/todolist';
+import {Footer} from './components/footer';
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,11 +80,15 @@ class App extends Component {
           return Todos;
       }
     };
+    const title = `Todos (${activeCounttodo})`;
     return (
       <div className="App">
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
         <div className="container">
           <Header />
-          <Input addTodos={this.addToList} />
+          <InputItem addTodos={this.addToList} />
           <Todolist
             Todos={filterByStatus(Todos, todoShow)}
             onItemClicked={this.onItemClicked} 
@@ -97,5 +102,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
