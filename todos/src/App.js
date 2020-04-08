@@ -10,26 +10,31 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Todos: [{
-        id: 1,
-        name: 'hello',
-        isComplete: false
-      }],
+      Todos: [],
       todoShow: 'All'
     };
     this.clearCompleted = this.clearCompleted.bind(this);
   }
 
   addToList = (newValue) => {
+    let { Todos } = this.state;
+    let newTodos = [];
+    if(!Todos.length) {
+      newTodos = {
+        id: 1,
+        name: newValue,
+        isComplete: false
+      }
+    } else {
+      newTodos = {
+        id: Todos[Todos.length - 1].id + 1,
+        name: newValue,
+        isComplete: false
+      }
+    }
+    Todos = Todos.concat(newTodos);
     this.setState({
-      Todos: [
-        ...this.state.Todos,
-        {
-          id: this.state.Todos.length + 1,
-          name: newValue,
-          isComplete: false
-        }
-      ]
+      Todos: Todos
     });
   }
 
@@ -48,7 +53,7 @@ export class App extends Component {
     const { Todos } = this.state;
     if(prevState.Todos !== Todos) {
       localStorage.setItem('Todos', JSON.stringify(Todos));
-      // console.log('update');
+      console.log('update');
     }
   }
   
@@ -67,14 +72,9 @@ export class App extends Component {
     });
   };
   
-  removeItem = value => {
-    for (let i = 0; i < this.state.Todos.length; i++) {
-      if (parseInt(value) === this.state.Todos[i].id) {
-        this.state.Todos.splice(i, 1);
-      }
-    }
+  removeItem = id => {
     this.setState({
-      ...this.state.Todos
+      Todos: this.state.Todos.filter(todo => todo.id !== parseInt(id))
     });
   };
 
