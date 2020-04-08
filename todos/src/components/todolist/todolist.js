@@ -6,19 +6,20 @@ export class Todolist extends Component {
     super(props);
   }
   render() {
-    const { Todos, remove, onItemClicked } = this.props;
+    const { Todos, remove, onChangeComp } = this.props;
     return (
       <div className="display-todo">
         <ul className="todo-list">
-          {Todos.map((todo, index) => (
+          {Todos.map((todo, index) => ( 
             <TodoItem
               name={todo.name}
               key={index}
               id={todo.id}
               removeItem={remove}
-              onChecked={onItemClicked}
+              onChangeComp={onChangeComp}
               isComplete={todo.isComplete} />
-          ))}
+            )
+          )}
         </ul>
       </div>
     );

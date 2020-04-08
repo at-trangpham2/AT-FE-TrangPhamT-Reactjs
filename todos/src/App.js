@@ -15,24 +15,53 @@ export class App extends Component {
     };
     this.clearCompleted = this.clearCompleted.bind(this);
   }
-  addToList = newValue => {
+
+  addToList = (newValue) => {
+    let { Todos } = this.state;
+    let newTodos = [];
+    if(!Todos.length) {
+      newTodos = {
+        id: 1,
+        name: newValue,
+        isComplete: false
+      }
+    } else {
+      newTodos = {
+        id: Todos[Todos.length - 1].id + 1,
+        name: newValue,
+        isComplete: false
+      }
+    }
+    Todos = Todos.concat(newTodos);
     this.setState({
-      Todos: [
-        ...this.state.Todos,
-        {
-          id: this.state.Todos.length + 1,
-          name: newValue,
-          isComplete: false
-        }
-      ]
+      Todos: Todos
     });
-  };
+  }
+
+  componentDidMount() {
+    let Todos = localStorage.getItem('Todos');
+    if(Todos) {
+      this.setState({
+        Todos: JSON.parse(localStorage.getItem('Todos'))
+      })
+    } else {
+      localStorage.setItem('Todos', JSON.stringify(this.state.Todos))
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { Todos } = this.state;
+    if(prevState.Todos !== Todos) {
+      localStorage.setItem('Todos', JSON.stringify(Todos));
+      console.log('update');
+    }
+  }
   
-  onItemClicked = value => {
+  onItemClicked = (id) => {
     const { Todos } = this.state;
     this.setState({
       Todos: Todos.map(item => {
-        if (parseInt(value) === item.id) {
+        if (parseInt(id) === item.id) {
           return {
             ...item,
             isComplete: !item.isComplete
@@ -40,37 +69,31 @@ export class App extends Component {
         }
         return item;
       }),
-      ...this.state.Todos
     });
   };
   
-  removeItem = value => {
-    for (let i = 0; i < this.state.Todos.length; i++) {
-      if (parseInt(value) === this.state.Todos[i].id) {
-        this.state.Todos.splice(i, 1);
-      }
-    }
+  removeItem = id => {
     this.setState({
-      ...this.state.Todos
+      Todos: this.state.Todos.filter(todo => todo.id !== parseInt(id))
     });
   };
 
-  showTodo = (todoShow = '') => {
+  showTodo = (newTodoShow) => {
     this.setState({
-      todoShow
+      todoShow: newTodoShow
     });
   };
 
   clearCompleted() {
     this.setState({
-      Todos: this.state.Todos.filter(todo => !todo.isComplete)
+      Todos : this.state.Todos.filter(todo => !todo.isComplete)
     })
   }
-
+  
   render() {
     const { Todos, todoShow } = this.state;
     let activeCounttodo = Todos.filter(todo => !todo.isComplete).length;
-    const filterByStatus = (Todos = [], todoShow = '') => {
+    const filterByStatus = (todoShow) => {
       switch (todoShow) {
         case 'Active':
           return Todos.filter(item => !item.isComplete);
@@ -90,15 +113,16 @@ export class App extends Component {
           <Header />
           <InputItem addTodos={this.addToList} />
           <Todolist
-            Todos={filterByStatus(Todos, todoShow)}
-            onItemClicked={this.onItemClicked} 
+            Todos={filterByStatus(todoShow)} 
+             onChangeComp={this.onItemClicked} 
             remove={this.removeItem}/>
           <Footer countAll={Todos.length}
-           countLeft={activeCounttodo}
+           countLeft={activeCounttodo} 
             clickToShow={this.showTodo}
               clickClearComp={this.clearCompleted} />
         </div>
       </div>
     );
   }
+  
 }
