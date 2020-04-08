@@ -3,24 +3,12 @@ import React, { Component } from 'react';
 export class TodoItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: this.props.id
-    }
-    this.completeTodo = this.completeTodo.bind(this);
-    this.onChangeComp = this.onChangeComp.bind(this);
     this.remove = this.remove.bind(this);
   }
   remove = e => {
     this.props.removeItem(e.target.value);
   };
-  completeTodo = event => {
-    this.props.onChecked(event.target.value);
-  };
-  onChangeComp = (event) => {
-    this.setState({
-      id: event.target.value
-    })
-  }
+  
   render() {
     let classes = 'label-todo';
     if (this.props.isComplete) {
@@ -33,8 +21,7 @@ export class TodoItem extends Component {
             value={this.props.id}
             checked={this.props.isComplete}
             type="checkbox"
-            onClick={this.completeTodo}
-            onChange={this.onChangeComp}></input>
+            onChange={() => this.props.onChangeComp(this.props.id)}></input>
           <label className={classes}>{this.props.name}</label>
         </div>
         <button
