@@ -1,6 +1,7 @@
 import React from 'react';
 
 export function TodoItem(props) {
+  //add className
   let classCurrent = 'label-todo';
   if(props.isCompleted) {
     classCurrent += ' todo-item-complete';
