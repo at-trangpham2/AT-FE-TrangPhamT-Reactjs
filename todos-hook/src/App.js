@@ -78,8 +78,6 @@ export function App() {
     let Todos = localStorage.getItem('Todos');
     if(Todos) {
       setTodos(JSON.parse(localStorage.getItem('Todos')))
-    } else {
-      localStorage.setItem('Todos', JSON.stringify(Todos))
     }
   },[])
 
