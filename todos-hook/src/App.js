@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import {Header} from './components/header';
 import {InputItem} from './components/addToList';
@@ -51,6 +51,11 @@ export function App() {
   //count todo is activing
   const countTodoActive = Todos.filter(item => !item.isCompleted).length;
 
+  //change title
+  useEffect(() => {
+    document.title = `Todos (${countTodoActive})`;
+  })
+
   //clear completed
   const clearCompleted = () => {
     setTodos(Todos.filter(item => !item.isCompleted))
@@ -68,6 +73,19 @@ export function App() {
     }
   }
   
+  //set and get data in localstorage
+  useEffect(() => {
+    let Todos = localStorage.getItem('Todos');
+    if(Todos) {
+      setTodos(JSON.parse(localStorage.getItem('Todos')))
+    }
+  },[])
+
+  useEffect(() => {
+    localStorage.setItem('Todos', JSON.stringify(Todos));
+    console.log('update');
+  },[Todos])
+
   return (
     <div className="App">
       <div className="container">
